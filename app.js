@@ -1,7 +1,7 @@
 const express = require("express");
 const http = require("http");
 const socketio = require("socket.io");
-const gameLogic = require("./game-logic");
+const initializeGame = require("./game-logic");
 const app = express();
 const cors = require("cors");
 app.use(cors());
@@ -28,8 +28,8 @@ const io = socketio(server);
 // run when client connects
 
 io.on("connection", (client) => {
-  gameLogic.initializeGame(io, client);
+  initializeGame(io, client);
 });
 
 // usually this is where we try to connect to our DB.
-app.listen(process.env.PORT || 8000);
+server.listen(process.env.PORT || 8000);
